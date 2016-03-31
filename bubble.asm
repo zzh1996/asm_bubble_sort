@@ -10,7 +10,7 @@ section .data
     ;format strings
     sfmt: db '%d',0
     tfmt: db 'cpu cycle:%d',10,0
-    pfmt: db '%d ',0
+    pfmt: db '%d',10,0
     timefmt: db 'real time: %dus',10,0
 
 section .bss
@@ -52,18 +52,19 @@ section .text
     ;sort
     mov eax,0
     loop2:
-    mov ebx,eax
-    inc ebx
+    mov ebx,0
     loop3:
-    mov ecx,[esi+4*eax]
-    mov edx,[esi+4*ebx]
+    mov ecx,[esi+4*ebx]
+    mov edx,[esi+4*ebx+4]
     cmp ecx,edx
     jle done
-    mov [esi+4*eax],edx ;swap
-    mov [esi+4*ebx],ecx
+    mov [esi+4*ebx],edx ;swap
+    mov [esi+4*ebx+4],ecx
     done:
     inc ebx
-    cmp ebx,TOTAL
+    mov ecx,TOTAL-1
+    sub ecx,eax
+    cmp ebx,ecx
     jl loop3
     inc eax
     cmp eax,TOTAL-1
