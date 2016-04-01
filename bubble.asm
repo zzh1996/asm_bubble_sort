@@ -1,4 +1,4 @@
-TOTAL equ 100000 ;total number
+TOTAL equ 10 ;total number
 
 global main
 
@@ -76,14 +76,19 @@ section .text
     pop ebx
     sub eax,ebx
     push eax
-    push tfmt
-    call printf
-    add esp,8
 
     push 0
     push time2
     call gettimeofday
     add esp,8
+
+    pop eax
+
+    push eax
+    push tfmt
+    call printf
+    add esp,8
+
 
     mov eax,[time2]
     sub eax,[time1]
