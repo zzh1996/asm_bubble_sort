@@ -1,4 +1,4 @@
-TOTAL equ 10 ;total number
+TOTAL equ 100000 ;total number
 
 global main
 
